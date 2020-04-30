@@ -1,0 +1,79 @@
+version: "3"
+services:
+  sourcedb:
+    image: timescale/timescaledb
+    container_name: sourcedb
+    hostname: sourcedb
+    environment:
+      POSTGRES_USER: 'sourcedb'
+      POSTGRES_PASSWORD: 'solution'
+      POSTGRES_DB: 'sourcedb'
+      TS_TUNE_MEMORY: '4GB'
+      TS_TUNE_NUM_CPUS: '4'
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    #  - postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    links:
+      - sourcedb
+    depends_on:
+      - sourcedb
+    environment:
+      PGADMIN_DEFAULT_EMAIL: samuelolle@yahoo.com
+      PGADMIN_DEFAULT_PASSWORD: leicester
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+
+  #comment initdb after you will have use it at first run
+  initdb:
+    build: .
+    entrypoint: airflow initdb
+    depends_on:
+      - sourcedb
+
+  webserver:
+    build: .
+    restart: always
+    depends_on:
+      - sourcedb
+    volumes:
+      - ./dags:/usr/local/airflow/dags
+      - ./plugins:/usr/local/airflow/plugins
+      - ./logs:/usr/local/airflow/logs
+    ports:
+      - "8080:8080"
+    entrypoint: airflow webserver
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  scheduler:
+    build: .
+    restart: always
+    depends_on:
+      - sourcedb
+    volumes:
+      - ./dags:/usr/local/airflow/dags
+      - ./plugins:/usr/local/airflow/plugins
+      - ./logs:/usr/local/airflow/logs
+    entrypoint: airflow scheduler
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-scheduler.pid ]"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+volumes:
+    pgadmin:
+#    postgres:

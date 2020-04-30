@@ -1,0 +1,100 @@
+[2020-04-15 15:56:53,232] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Ingest.insert_target_table_no_duplicate 2020-04-15T15:56:48.447921+00:00 [queued]>
+[2020-04-15 15:56:53,294] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Ingest.insert_target_table_no_duplicate 2020-04-15T15:56:48.447921+00:00 [queued]>
+[2020-04-15 15:56:53,294] {taskinstance.py:841} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-15 15:56:53,294] {taskinstance.py:842} INFO - Starting attempt 1 of 1
+[2020-04-15 15:56:53,295] {taskinstance.py:843} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-15 15:56:53,339] {taskinstance.py:862} INFO - Executing <Task(PostgresOperator): insert_target_table_no_duplicate> on 2020-04-15T15:56:48.447921+00:00
+[2020-04-15 15:56:53,340] {base_task_runner.py:133} INFO - Running: ['airflow', 'run', 'Ingest', 'insert_target_table_no_duplicate', '2020-04-15T15:56:48.447921+00:00', '--job_id', '101', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/ingest.py', '--cfg_path', '/tmp/tmpm4lpctbt']
+[2020-04-15 15:56:54,716] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate /usr/local/lib/python3.7/site-packages/airflow/configuration.py:226: FutureWarning: The task_runner setting in [core] has the old default value of 'BashTaskRunner'. This value has been changed to 'StandardTaskRunner' in the running config, but please update your config before Apache Airflow 2.0.
+[2020-04-15 15:56:54,717] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate   FutureWarning
+[2020-04-15 15:56:54,717] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:65: DeprecationWarning: The elasticsearch_host option in [elasticsearch] has been renamed to host - the old setting has been used, but please update your config.
+[2020-04-15 15:56:54,717] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate   ELASTICSEARCH_HOST = conf.get('elasticsearch', 'HOST')
+[2020-04-15 15:56:54,717] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:67: DeprecationWarning: The elasticsearch_log_id_template option in [elasticsearch] has been renamed to log_id_template - the old setting has been used, but please update your config.
+[2020-04-15 15:56:54,718] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate   ELASTICSEARCH_LOG_ID_TEMPLATE = conf.get('elasticsearch', 'LOG_ID_TEMPLATE')
+[2020-04-15 15:56:54,718] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:69: DeprecationWarning: The elasticsearch_end_of_log_mark option in [elasticsearch] has been renamed to end_of_log_mark - the old setting has been used, but please update your config.
+[2020-04-15 15:56:54,718] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate   ELASTICSEARCH_END_OF_LOG_MARK = conf.get('elasticsearch', 'END_OF_LOG_MARK')
+[2020-04-15 15:56:54,996] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate [2020-04-15 15:56:54,995] {settings.py:252} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=3667
+[2020-04-15 15:56:56,278] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate [2020-04-15 15:56:56,276] {__init__.py:51} INFO - Using executor LocalExecutor
+[2020-04-15 15:56:56,279] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate [2020-04-15 15:56:56,278] {dagbag.py:92} INFO - Filling up the DagBag from /usr/local/airflow/dags/ingest.py
+[2020-04-15 15:56:56,379] {base_task_runner.py:115} INFO - Job 101: Subtask insert_target_table_no_duplicate [2020-04-15 15:56:56,378] {cli.py:545} INFO - Running <TaskInstance: Ingest.insert_target_table_no_duplicate 2020-04-15T15:56:48.447921+00:00 [running]> on host 782305ba671a
+[2020-04-15 15:56:56,462] {postgres_operator.py:62} INFO - Executing: INSERT INTO company SELECT * FROM dblink('dbname=sourcedb host=sourcedb user=sourcedb password=solution', 'SELECT company_id, status, rating_threshold, company_name, foundation_date, legal_form, created_at FROM company')
+as t1(
+    company_id text COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    rating_threshold character varying(255) COLLATE pg_catalog."default",
+    company_name text COLLATE pg_catalog."default",
+    foundation_date date,
+    legal_form character varying(255) COLLATE pg_catalog."default",
+    created_at date
+)
+where not exists(
+    SELECT * FROM dblink('dbname=targetdb host=sourcedb user=sourcedb password=solution', 'SELECT company_id FROM company')
+    as t2(company_id text COLLATE pg_catalog."default") where t1.company_id = t2.company_id
+);
+
+
+
+
+
+
+INSERT INTO address SELECT * FROM dblink('dbname=sourcedb host=sourcedb user=sourcedb password=solution', 'SELECT id, company_id, country, postal_code, city, district, street, street_number, addition, created_at FROM address')
+as t1(
+    id integer,
+    company_id text COLLATE pg_catalog."default",
+    country character varying(255) COLLATE pg_catalog."default",
+    postal_code character varying(255) COLLATE pg_catalog."default",
+    city character varying(255) COLLATE pg_catalog."default",
+    district character varying(255) COLLATE pg_catalog."default",
+    street character varying(255) COLLATE pg_catalog."default",
+    street_number character varying(255) COLLATE pg_catalog."default",
+    addition character varying(255) COLLATE pg_catalog."default",
+    created_at date
+)
+where not exists(
+    SELECT * FROM dblink('dbname=targetdb host=sourcedb user=sourcedb password=solution', 'SELECT id, company_id FROM address')
+    as t2(id integer, company_id text COLLATE pg_catalog."default") where t1.id = t2.id and t1.company_id = t2.company_id
+);
+
+[2020-04-15 15:56:56,483] {logging_mixin.py:112} INFO - [2020-04-15 15:56:56,482] {base_hook.py:84} INFO - Using connection to: id: target. Host: sourcedb, Port: 5432, Schema: targetdb, Login: sourcedb, Password: XXXXXXXX, extra: {}
+[2020-04-15 15:56:56,490] {logging_mixin.py:112} INFO - [2020-04-15 15:56:56,490] {dbapi_hook.py:171} INFO - INSERT INTO company SELECT * FROM dblink('dbname=sourcedb host=sourcedb user=sourcedb password=solution', 'SELECT company_id, status, rating_threshold, company_name, foundation_date, legal_form, created_at FROM company')
+as t1(
+    company_id text COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    rating_threshold character varying(255) COLLATE pg_catalog."default",
+    company_name text COLLATE pg_catalog."default",
+    foundation_date date,
+    legal_form character varying(255) COLLATE pg_catalog."default",
+    created_at date
+)
+where not exists(
+    SELECT * FROM dblink('dbname=targetdb host=sourcedb user=sourcedb password=solution', 'SELECT company_id FROM company')
+    as t2(company_id text COLLATE pg_catalog."default") where t1.company_id = t2.company_id
+);
+
+
+
+
+
+
+INSERT INTO address SELECT * FROM dblink('dbname=sourcedb host=sourcedb user=sourcedb password=solution', 'SELECT id, company_id, country, postal_code, city, district, street, street_number, addition, created_at FROM address')
+as t1(
+    id integer,
+    company_id text COLLATE pg_catalog."default",
+    country character varying(255) COLLATE pg_catalog."default",
+    postal_code character varying(255) COLLATE pg_catalog."default",
+    city character varying(255) COLLATE pg_catalog."default",
+    district character varying(255) COLLATE pg_catalog."default",
+    street character varying(255) COLLATE pg_catalog."default",
+    street_number character varying(255) COLLATE pg_catalog."default",
+    addition character varying(255) COLLATE pg_catalog."default",
+    created_at date
+)
+where not exists(
+    SELECT * FROM dblink('dbname=targetdb host=sourcedb user=sourcedb password=solution', 'SELECT id, company_id FROM address')
+    as t2(id integer, company_id text COLLATE pg_catalog."default") where t1.id = t2.id and t1.company_id = t2.company_id
+);
+
+[2020-04-15 15:56:58,198] {logging_mixin.py:112} INFO - [2020-04-15 15:56:58,198] {local_task_job.py:124} WARNING - Time since last heartbeat(0.02 s) < heartrate(5.0 s), sleeping for 4.975116 s
+[2020-04-15 15:57:03,177] {logging_mixin.py:112} INFO - [2020-04-15 15:57:03,176] {local_task_job.py:103} INFO - Task exited with return code 0

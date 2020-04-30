@@ -1,0 +1,32 @@
+[2020-04-13 00:31:28,868] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Create_Target_Tables.delete_db 2020-04-13T00:31:23.000066+00:00 [queued]>
+[2020-04-13 00:31:28,937] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Create_Target_Tables.delete_db 2020-04-13T00:31:23.000066+00:00 [queued]>
+[2020-04-13 00:31:28,938] {taskinstance.py:841} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-13 00:31:28,938] {taskinstance.py:842} INFO - Starting attempt 1 of 1
+[2020-04-13 00:31:28,938] {taskinstance.py:843} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-13 00:31:28,974] {taskinstance.py:862} INFO - Executing <Task(PythonOperator): delete_db> on 2020-04-13T00:31:23.000066+00:00
+[2020-04-13 00:31:28,976] {base_task_runner.py:133} INFO - Running: ['airflow', 'run', 'Create_Target_Tables', 'delete_db', '2020-04-13T00:31:23.000066+00:00', '--job_id', '72', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/test.py', '--cfg_path', '/tmp/tmp8oe2lx6j']
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db /usr/local/lib/python3.7/site-packages/airflow/configuration.py:226: FutureWarning: The task_runner setting in [core] has the old default value of 'BashTaskRunner'. This value has been changed to 'StandardTaskRunner' in the running config, but please update your config before Apache Airflow 2.0.
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db   FutureWarning
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:65: DeprecationWarning: The elasticsearch_host option in [elasticsearch] has been renamed to host - the old setting has been used, but please update your config.
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db   ELASTICSEARCH_HOST = conf.get('elasticsearch', 'HOST')
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:67: DeprecationWarning: The elasticsearch_log_id_template option in [elasticsearch] has been renamed to log_id_template - the old setting has been used, but please update your config.
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db   ELASTICSEARCH_LOG_ID_TEMPLATE = conf.get('elasticsearch', 'LOG_ID_TEMPLATE')
+[2020-04-13 00:31:30,782] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:69: DeprecationWarning: The elasticsearch_end_of_log_mark option in [elasticsearch] has been renamed to end_of_log_mark - the old setting has been used, but please update your config.
+[2020-04-13 00:31:30,783] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db   ELASTICSEARCH_END_OF_LOG_MARK = conf.get('elasticsearch', 'END_OF_LOG_MARK')
+[2020-04-13 00:31:31,271] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db [2020-04-13 00:31:31,270] {settings.py:252} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=1277
+[2020-04-13 00:31:33,044] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db [2020-04-13 00:31:33,043] {__init__.py:51} INFO - Using executor LocalExecutor
+[2020-04-13 00:31:33,045] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db [2020-04-13 00:31:33,044] {dagbag.py:92} INFO - Filling up the DagBag from /usr/local/airflow/dags/test.py
+[2020-04-13 00:31:33,267] {base_task_runner.py:115} INFO - Job 72: Subtask delete_db [2020-04-13 00:31:33,266] {cli.py:545} INFO - Running <TaskInstance: Create_Target_Tables.delete_db 2020-04-13T00:31:23.000066+00:00 [running]> on host fec4acbf91c3
+[2020-04-13 00:31:33,341] {python_operator.py:105} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_ID=Create_Target_Tables
+AIRFLOW_CTX_TASK_ID=delete_db
+AIRFLOW_CTX_EXECUTION_DATE=2020-04-13T00:31:23.000066+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2020-04-13T00:31:23.000066+00:00
+[2020-04-13 00:31:34,372] {logging_mixin.py:112} INFO - [2020-04-13 00:31:34,372] {local_task_job.py:124} WARNING - Time since last heartbeat(0.05 s) < heartrate(5.0 s), sleeping for 4.947729 s
+[2020-04-13 00:31:38,442] {logging_mixin.py:112} INFO - database "targetdb" is being accessed by other users
+DETAIL:  There are 10 other sessions using the database.
+[2020-04-13 00:31:38,442] {logging_mixin.py:112} INFO - 
+[2020-04-13 00:31:38,442] {python_operator.py:114} INFO - Done. Returned value was: False
+[2020-04-13 00:31:39,328] {logging_mixin.py:112} INFO - [2020-04-13 00:31:39,327] {local_task_job.py:103} INFO - Task exited with return code 0

@@ -1,0 +1,13 @@
+FROM puckel/docker-airflow:1.10.6
+#ARG SSL_KEYSTORE_PASSWORD
+USER root
+#RUN apt-get update && apt-get install -y 
+RUN pip install --upgrade pip
+USER airflow
+#RUN chattr -i * .[^.]*
+#RUN lsattr * .[^.]*
+#RUN chown -R airflow:airflow * .[^.]*
+#RUN python -m pip install --upgrade --user --no-warn-script-location pip
+RUN python -m pip install --user psycopg2-binary
+ENV AIRFLOW_HOME=/usr/local/airflow
+COPY ./airflow.cfg /usr/local/airflow/airflow.cfg

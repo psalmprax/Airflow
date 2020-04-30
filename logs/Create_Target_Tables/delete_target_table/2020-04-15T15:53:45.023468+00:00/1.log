@@ -1,0 +1,32 @@
+[2020-04-15 15:54:35,389] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Create_Target_Tables.delete_target_table 2020-04-15T15:53:45.023468+00:00 [queued]>
+[2020-04-15 15:54:35,465] {taskinstance.py:630} INFO - Dependencies all met for <TaskInstance: Create_Target_Tables.delete_target_table 2020-04-15T15:53:45.023468+00:00 [queued]>
+[2020-04-15 15:54:35,466] {taskinstance.py:841} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-15 15:54:35,466] {taskinstance.py:842} INFO - Starting attempt 1 of 1
+[2020-04-15 15:54:35,466] {taskinstance.py:843} INFO - 
+--------------------------------------------------------------------------------
+[2020-04-15 15:54:35,481] {taskinstance.py:862} INFO - Executing <Task(PostgresOperator): delete_target_table> on 2020-04-15T15:53:45.023468+00:00
+[2020-04-15 15:54:35,481] {base_task_runner.py:133} INFO - Running: ['airflow', 'run', 'Create_Target_Tables', 'delete_target_table', '2020-04-15T15:53:45.023468+00:00', '--job_id', '98', '--pool', 'default_pool', '--raw', '-sd', 'DAGS_FOLDER/test.py', '--cfg_path', '/tmp/tmpl6sna58j']
+[2020-04-15 15:54:36,975] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table /usr/local/lib/python3.7/site-packages/airflow/configuration.py:226: FutureWarning: The task_runner setting in [core] has the old default value of 'BashTaskRunner'. This value has been changed to 'StandardTaskRunner' in the running config, but please update your config before Apache Airflow 2.0.
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table   FutureWarning
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:65: DeprecationWarning: The elasticsearch_host option in [elasticsearch] has been renamed to host - the old setting has been used, but please update your config.
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table   ELASTICSEARCH_HOST = conf.get('elasticsearch', 'HOST')
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:67: DeprecationWarning: The elasticsearch_log_id_template option in [elasticsearch] has been renamed to log_id_template - the old setting has been used, but please update your config.
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table   ELASTICSEARCH_LOG_ID_TEMPLATE = conf.get('elasticsearch', 'LOG_ID_TEMPLATE')
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table /usr/local/lib/python3.7/site-packages/airflow/config_templates/airflow_local_settings.py:69: DeprecationWarning: The elasticsearch_end_of_log_mark option in [elasticsearch] has been renamed to end_of_log_mark - the old setting has been used, but please update your config.
+[2020-04-15 15:54:36,976] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table   ELASTICSEARCH_END_OF_LOG_MARK = conf.get('elasticsearch', 'END_OF_LOG_MARK')
+[2020-04-15 15:54:37,259] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table [2020-04-15 15:54:37,258] {settings.py:252} INFO - settings.configure_orm(): Using pool settings. pool_size=5, max_overflow=10, pool_recycle=1800, pid=2249
+[2020-04-15 15:54:38,796] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table [2020-04-15 15:54:38,795] {__init__.py:51} INFO - Using executor LocalExecutor
+[2020-04-15 15:54:38,796] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table [2020-04-15 15:54:38,796] {dagbag.py:92} INFO - Filling up the DagBag from /usr/local/airflow/dags/test.py
+[2020-04-15 15:54:38,899] {base_task_runner.py:115} INFO - Job 98: Subtask delete_target_table [2020-04-15 15:54:38,898] {cli.py:545} INFO - Running <TaskInstance: Create_Target_Tables.delete_target_table 2020-04-15T15:53:45.023468+00:00 [running]> on host 782305ba671a
+[2020-04-15 15:54:38,952] {postgres_operator.py:62} INFO - Executing: DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS company CASCADE;
+[2020-04-15 15:54:38,972] {logging_mixin.py:112} INFO - [2020-04-15 15:54:38,972] {base_hook.py:84} INFO - Using connection to: id: target. Host: sourcedb, Port: 5432, Schema: targetdb, Login: sourcedb, Password: XXXXXXXX, extra: {}
+[2020-04-15 15:54:38,979] {logging_mixin.py:112} INFO - [2020-04-15 15:54:38,979] {dbapi_hook.py:171} INFO - DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS company CASCADE;
+[2020-04-15 15:54:38,992] {postgres_operator.py:67} INFO - NOTICE:  drop cascades to view last_address_record_inserted
+
+[2020-04-15 15:54:38,993] {postgres_operator.py:67} INFO - NOTICE:  drop cascades to view last_company_record_inserted
+
+[2020-04-15 15:54:40,331] {logging_mixin.py:112} INFO - [2020-04-15 15:54:40,330] {local_task_job.py:124} WARNING - Time since last heartbeat(0.04 s) < heartrate(5.0 s), sleeping for 4.964112 s
+[2020-04-15 15:54:45,304] {logging_mixin.py:112} INFO - [2020-04-15 15:54:45,303] {local_task_job.py:103} INFO - Task exited with return code 0
